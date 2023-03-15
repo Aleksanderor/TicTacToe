@@ -19,8 +19,8 @@ class Board {
         return board[index];
     }
 
-    public String setBoardField(int index, String value) {
-        return board[index] = value;
+    public void setBoardField(int index, String value) {
+        board[index] = value;
     }
 
     public int[][] getWinConditions() {

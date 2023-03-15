@@ -1,4 +1,3 @@
-
 public class TicTacToe {
     private final Board board;
     private Console console;
@@ -26,7 +25,6 @@ public class TicTacToe {
 
 
     }
-
 
     public void startCvsP(){
 
@@ -74,17 +72,15 @@ public class TicTacToe {
 
     private void handleGameProgressPvsCpu() {
         console.display(board);
-        Player currentPlayer = gameActions.isPlayer1Turn() ? gameConfig.getPlayer1() : gameConfig.getComputerPlayer();
-        int squareNum;
-        String marker;
-        if (currentPlayer instanceof Player) {
-            squareNum = gameActions.makeMove(currentPlayer);
-            marker = currentPlayer.getMarker();
+        if (gameActions.isPlayer1Turn()) {
+            int squareNum = gameActions.makeMove(gameConfig.getPlayer1());
+            String marker = gameConfig.getPlayer1().getMarker();
+            gameActions.updateBoard(squareNum, marker);
         } else {
-            squareNum = gameActions.makeCpuMove();
-            marker = currentPlayer.getMarker();
+            int squareNum = gameActions.makeCpuMove();
+            String marker = gameConfig.getPlayer2().getMarker();
+            gameActions.updateBoard(squareNum, marker);
         }
-        gameActions.updateBoard(squareNum, marker);
         gameActions.changePlayerTurn();
     }
 

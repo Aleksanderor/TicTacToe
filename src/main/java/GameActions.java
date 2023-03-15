@@ -16,7 +16,7 @@ public class GameActions {
         int squareNum = scanner.nextInt();
 
         // Check for valid input
-        while (isValidMove(squareNum)) {
+        while (!isValidMove(squareNum)) {
             System.out.print("Invalid move :( Enter a square number (1-9): ");
             squareNum = scanner.nextInt();
         }
@@ -24,22 +24,18 @@ public class GameActions {
         return squareNum;
     }
 
-    public int makeCpuMove(ComputerPlayer computerPlayer) {
+    public int makeCpuMove() {
         int squareNum;
         Random rand = new Random();
         do {
             squareNum = rand.nextInt(9) + 1;
         } while (!isValidMove(squareNum));
+        System.out.printf("Computer made move and selected %s \n", squareNum);
         return squareNum;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
     private boolean isValidMove(int squareNum) {
-        return squareNum < 1 || squareNum > 9 || !isSquareEmpty(squareNum);
+        return squareNum >= 1 && squareNum <= 9 && isSquareEmpty(squareNum);
     }
 
     public boolean isSquareEmpty(int squareNum) {

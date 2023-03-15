@@ -1,12 +1,9 @@
 public class GameConfig {
+    private static final String COMPUTER_NAME = "computer";
     private final Console console;
     public String chooseOpponent;
     private Player player1;
     private Player player2;
-
-    private ComputerPlayer computerPlayer;
-
-    private Player player;
 
     public GameConfig() {
         this.console = new Console();
@@ -42,6 +39,8 @@ public class GameConfig {
         String playerName = console.readString();
         console.print(playerName + " choose your marker");
         String playerMarker = console.readString();
+        player1 = new Player(playerName, playerMarker);
+        player2 = new Player(COMPUTER_NAME, playerMarker.equals("X") ? "O" : "X");
     }
 
     private String getCorrectMarker(String player1Marker) {
@@ -58,9 +57,5 @@ public class GameConfig {
 
     public Player getPlayer2() {
         return player2;
-    }
-
-    public ComputerPlayer getComputerPlayer(){
-        return computerPlayer;
     }
 }
