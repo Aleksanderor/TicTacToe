@@ -27,13 +27,26 @@ public class TicTacToe {
 
     }
 
+
+    public void startCvsP(){
+
+        gameConfig.collectPlayerVsCpuData();
+
+        while (!gameActions.isGameOver()) {
+            handleGameProgressPvsCpu();
+        }
+
+        console.display(board);
+        handleGameFinished();
+        playAgain();
+    }
     // start player vs player
-    public void start() {
-        console.print("Welcome to Tic Tac Toe!");
+    public void startPvsP() {
+
         gameConfig.collectPlayersData();
 
         while (!gameActions.isGameOver()) {
-            handleGameProgress();
+            handleGameProgressPvsP();
         }
 
         console.display(board);
@@ -50,11 +63,27 @@ public class TicTacToe {
         }
     }
 
-    private void handleGameProgress() {
+    private void handleGameProgressPvsP() {
         console.display(board);
         Player currentPlayer = gameActions.isPlayer1Turn() ? gameConfig.getPlayer1() : gameConfig.getPlayer2();
         int squareNum = gameActions.makeMove(currentPlayer);
         String marker = currentPlayer.getMarker();
+        gameActions.updateBoard(squareNum, marker);
+        gameActions.changePlayerTurn();
+    }
+
+    private void handleGameProgressPvsCpu() {
+        console.display(board);
+        Player currentPlayer = gameActions.isPlayer1Turn() ? gameConfig.getPlayer1() : gameConfig.getComputerPlayer();
+        int squareNum;
+        String marker;
+        if (currentPlayer instanceof Player) {
+            squareNum = gameActions.makeMove(currentPlayer);
+            marker = currentPlayer.getMarker();
+        } else {
+            squareNum = gameActions.makeCpuMove();
+            marker = currentPlayer.getMarker();
+        }
         gameActions.updateBoard(squareNum, marker);
         gameActions.changePlayerTurn();
     }
@@ -68,7 +97,7 @@ public class TicTacToe {
         }
         if (answer.equals("Y")) {
             gameActions.reset();
-            start();
+            startPvsP();
         } else {
             console.print("Thanks for playing!");
         }

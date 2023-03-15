@@ -1,10 +1,26 @@
 public class GameConfig {
     private final Console console;
+    public String chooseOpponent;
     private Player player1;
     private Player player2;
 
+    private ComputerPlayer computerPlayer;
+
+    private Player player;
+
     public GameConfig() {
         this.console = new Console();
+    }
+
+    public void chooseOpponent(){
+        console.print("Would you like to play vs a Computer or a Player");
+        String opponentChoice = console.readString().toUpperCase();
+
+        while (!opponentChoice.equals("C") && !opponentChoice.equals("P")) {
+            console.print("Invalid move, choose to play with Computer or Player");
+            opponentChoice = console.readString().toUpperCase();
+        }
+        chooseOpponent = opponentChoice;
     }
 
     public void collectPlayersData(){
@@ -21,6 +37,13 @@ public class GameConfig {
         player2 = new Player(player2Name, player2Marker);
     }
 
+    public void collectPlayerVsCpuData(){
+        console.print("Player, enter your name");
+        String playerName = console.readString();
+        console.print(playerName + " choose your marker");
+        String playerMarker = console.readString();
+    }
+
     private String getCorrectMarker(String player1Marker) {
         while (!player1Marker.equals("X") && !player1Marker.equals("O")) {
             console.print("Invalid marker! Choose X or O:");
@@ -35,5 +58,9 @@ public class GameConfig {
 
     public Player getPlayer2() {
         return player2;
+    }
+
+    public ComputerPlayer getComputerPlayer(){
+        return computerPlayer;
     }
 }
