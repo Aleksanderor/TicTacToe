@@ -4,25 +4,13 @@ public class TicTacToe {
     private GameConfig gameConfig;
     private GameActions gameActions;
 
+    private PlayerStats playerStats;
+
     public TicTacToe() {
         console = new Console();
         board = new Board(3);
         gameActions = new GameActions(board);
         gameConfig  = new GameConfig();
-
-
-//        console.print("Would you like to play with an opponent or against a computer? O/C");
-//        String opponentChoice = console.readString().toUpperCase();
-
-//        while (!opponentChoice.equals("O") && !opponentChoice.equals("C")) {
-//            console.print("Invalid move! Choose an opponen oraz computer O/C");
-//            opponentChoice = console.readString().toUpperCase();
-//        }
-//
-//        if(opponentChoice.equals("O")){
-//
-//        }
-
 
     }
 
