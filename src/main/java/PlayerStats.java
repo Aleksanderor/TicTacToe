@@ -2,22 +2,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerStats {
-    private Map<Player, Integer[]> resultsMap;
+
+    Console console;
+    private Map<Player, GameScore> resultsMap;
 
     public PlayerStats() {
         resultsMap = new HashMap<>();
     }
 
-    public void addResult(Player player, int wins, int losses, int ties) {
-        Integer[] results = {wins, losses, ties};
-        resultsMap.put(player, results);
+    public void addWin(Player player) {
+        if (!resultsMap.containsKey(player)) {
+            resultsMap.put(player, new GameScore(1, 0, 0));
+        } else {
+            resultsMap.get(player).addWin();
+        }
+    }
+
+    public void addTie(Player player) {
+        if (!resultsMap.containsKey(player)) {
+            resultsMap.put(player, new GameScore(0, 1, 0));
+        } else {
+            resultsMap.get(player).addTie();
+        }
+    }
+
+    public void addLoss(Player player) {
+        if (!resultsMap.containsKey(player)) {
+            resultsMap.put(player, new GameScore(0, 0, 1));
+        } else {
+            resultsMap.get(player).addWin();
+        }
     }
 
     public void printResults() {
-        for (Player player : resultsMap.keySet()) {
-            System.out.println(player.getName() + " - Wins: " + resultsMap.get(player)[0]
-                    + ", Losses: " + resultsMap.get(player)[1]
-                    + ", Ties: " + resultsMap.get(player)[2]);
+        for (Map.Entry<Player, GameScore> entry : resultsMap.entrySet()) {
+            Player player = entry.getKey();
+            GameScore score = entry.getValue();
+            console.print(player.getName() + " results:");
+            console.print("Wins: " + score.getWins());
+            console.print("Losses: " + score.getLosses());
+            console.print("Ties: " + score.getTies());
         }
     }
 }

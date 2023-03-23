@@ -5,6 +5,8 @@ public class GameConfig {
     private Player player1;
     private Player player2;
 
+    public PlayerStats playerStats;
+
     public GameConfig() {
         this.console = new Console();
     }
@@ -32,6 +34,8 @@ public class GameConfig {
         String player2Name = console.readString();
         String player2Marker = player1Marker.equals("X") ? "O" : "X";
         player2 = new Player(player2Name, player2Marker);
+
+
     }
 
     public void collectPlayerVsCpuData(){
