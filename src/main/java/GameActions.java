@@ -5,9 +5,12 @@ public class GameActions {
     private Board board;
     private boolean player1Turn = true;
 
+    private GameConfig gameConfig;
 
-    public GameActions(Board board) {
+
+    public GameActions(Board board, GameConfig gameConfig) {
         this.board = board;
+        this.gameConfig = gameConfig;
     }
 
     public int makeMove(Player player) {

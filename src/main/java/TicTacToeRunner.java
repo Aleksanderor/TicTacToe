@@ -1,5 +1,7 @@
 public class TicTacToeRunner {
     public static void main(String[] args) {
+
+        PlayerStats playerStats = new PlayerStats();
         TicTacToe game = new TicTacToe();
         GameConfig gameConfig = new GameConfig();
         Console console = new Console();
@@ -13,5 +15,7 @@ public class TicTacToeRunner {
             game.startCvsP();
         }
 
+        console.print("----- Results -----");
+        playerStats.printResults();
     }
 }

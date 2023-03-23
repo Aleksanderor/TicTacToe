@@ -1,22 +1,25 @@
 public class TicTacToe {
+
     private final Board board;
     private Console console;
     private GameConfig gameConfig;
     private GameActions gameActions;
-
-    private Player player;
+    private Player player1;
+    private Player player2;
     private PlayerStats playerStats;
 
     public TicTacToe() {
         console = new Console();
         board = new Board(3);
-        gameActions = new GameActions(board);
+        gameActions = new GameActions(board, gameConfig);
         gameConfig  = new GameConfig();
+        playerStats = new PlayerStats();
 
     }
 
     public void startCvsP(){
 
+        PlayerStats playerStats1;
         gameConfig.collectPlayerVsCpuData();
 
         while (!gameActions.isGameOver()) {
@@ -45,9 +48,9 @@ public class TicTacToe {
         String winner = gameActions.getWinner();
         if (winner != null) {
             console.print("Congratulations, " + winner + "! You have won the game!");
-            Player winningPlayer = player.getPlayerByMarker(winner);
+            Player winningPlayer = gameConfig.getPlayerByMarker(winner);
             playerStats.addWin(winningPlayer);
-            Player losingPlayer = gameConfig.getPlayer2().getPlayerByMarker(winningPlayer.getMarker().equals("X") ? "O" : "X");
+            Player losingPlayer = gameConfig.getPlayerByMarker(winningPlayer.getMarker().equals("X") ? "O" : "X");
             playerStats.addLoss(losingPlayer);
         } else {
             console.print("It's a draw!");

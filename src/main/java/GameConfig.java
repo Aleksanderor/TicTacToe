@@ -63,4 +63,14 @@ public class GameConfig {
         return player2;
     }
 
+    public Player getPlayerByMarker(String marker) {
+        if (player1.getMarker().equals(marker)) {
+            return player1;
+        } else if (player2.getMarker().equals(marker)) {
+            return player2;
+        } else {
+            throw new IllegalArgumentException("Invalid marker: " + marker);
+        }
+    }
+
 }
