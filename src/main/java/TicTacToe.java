@@ -4,6 +4,7 @@ public class TicTacToe {
     private GameConfig gameConfig;
     private GameActions gameActions;
 
+    private Player player;
     private PlayerStats playerStats;
 
     public TicTacToe() {
@@ -44,8 +45,14 @@ public class TicTacToe {
         String winner = gameActions.getWinner();
         if (winner != null) {
             console.print("Congratulations, " + winner + "! You have won the game!");
+            Player winningPlayer = player.getPlayerByMarker(winner);
+            playerStats.addWin(winningPlayer);
+            Player losingPlayer = gameConfig.getPlayer2().getPlayerByMarker(winningPlayer.getMarker().equals("X") ? "O" : "X");
+            playerStats.addLoss(losingPlayer);
         } else {
             console.print("It's a draw!");
+            playerStats.addTie(gameConfig.getPlayer1());
+            playerStats.addTie(gameConfig.getPlayer2());
         }
     }
 

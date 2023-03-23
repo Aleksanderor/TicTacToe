@@ -63,11 +63,4 @@ public class GameConfig {
         return player2;
     }
 
-    public Player getPlayerByMarker(String marker) {
-        if (getPlayer1().getMarker().equals(marker)) {
-            return getPlayer1();
-        } else {
-            return getPlayer2();
-        }
-    }
 }
