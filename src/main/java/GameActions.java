@@ -19,7 +19,7 @@ public class GameActions {
         int squareNum = scanner.nextInt();
 
         // Check for valid input
-        while (!isValidMove(squareNum)) {
+        while (!isValidMove(squareNum, board.getSize())) {
             System.out.print("Invalid move :( Enter a square number (1-9): ");
             squareNum = scanner.nextInt();
         }
@@ -31,14 +31,14 @@ public class GameActions {
         int squareNum;
         Random rand = new Random();
         do {
-            squareNum = rand.nextInt(9) + 1;
-        } while (!isValidMove(squareNum));
+            squareNum = rand.nextInt(board.getSize()) + 1;
+        } while (!isValidMove(squareNum, board.getSize()));
         System.out.printf("Computer made move and selected %s \n", squareNum);
         return squareNum;
     }
 
-    private boolean isValidMove(int squareNum) {
-        return squareNum >= 1 && squareNum <= 9 && isSquareEmpty(squareNum);
+    private boolean isValidMove(int squareNum, int boardSize) {
+        return squareNum >= 1 && squareNum <= 100 && isSquareEmpty(squareNum);
     }
 
     public boolean isSquareEmpty(int squareNum) {
@@ -50,7 +50,7 @@ public class GameActions {
     }
 
     public boolean isGameOver() {
-        return getWinner() != null || isDraw();
+        return getWinner(board.getWinLength()) != null || isDraw();
     }
 
     public boolean isDraw() {
@@ -62,24 +62,29 @@ public class GameActions {
         return true;
     }
 
-    public String getWinner() {
-        String winner = null;
+    public Player getWinner(int winLength) {
+        String marker = null;
         for (int[] condition : board.getWinConditions()) {
-            String line = board.getBoardField(condition[0]) + board.getBoardField(condition[1]) + board.getBoardField(condition[2]);
-            if (line.equals("XXX")) {
-                winner = "X";
+            StringBuilder line = new StringBuilder();
+            for(int i = 0; i < winLength; i++){
+                line.append(board.getBoardField(condition[i]));
+            }
+
+            if (line.toString().equals("X".repeat(winLength))) {
+                marker = "X";
                 break;
             }
-            else if (line.equals("OOO")) {
-                winner = "O";
+            else if (line.toString().equals("O".repeat(winLength))) {
+                marker = "O";
                 break;
             }
         }
-        return winner;
+        return marker != null ? gameConfig.getPlayerByMarker(marker) : null;
     }
 
 
     public void reset() {
+        player1Turn = true;
         for (int i = 0; i < 9; i++) {
             board.setBoardField(i, String.valueOf(i+1));
         }

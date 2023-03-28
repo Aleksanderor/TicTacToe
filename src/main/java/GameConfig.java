@@ -4,11 +4,10 @@ public class GameConfig {
     public String chooseOpponent;
     private Player player1;
     private Player player2;
+    private boolean pvpMode;
 
-    public PlayerStats playerStats;
-
-    public GameConfig() {
-        this.console = new Console();
+    public GameConfig(Console console) {
+        this.console = console;
     }
 
     public void chooseOpponent(){
@@ -73,4 +72,11 @@ public class GameConfig {
         }
     }
 
+    public boolean isPvpMode() {
+        return pvpMode;
+    }
+
+    public void setPvpMode(boolean pvpMode) {
+        this.pvpMode = pvpMode;
+    }
 }

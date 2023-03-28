@@ -1,27 +1,39 @@
-public class TicTacToe {
+import java.io.File;
 
+public class TicTacToe {
+    File savedHashMaps = new File("ranking.list");
     private final Board board;
     private Console console;
     private GameConfig gameConfig;
-    private GameActions gameActions;
-    private Player player1;
-    private Player player2;
-    private PlayerStats playerStats;
+    private final GameActions gameActions;
+    private final PlayerStats playerStats;
 
     public TicTacToe() {
         console = new Console();
-        board = new Board(3);
+        board = new Board(10,4);
+        gameConfig  = new GameConfig(console);
         gameActions = new GameActions(board, gameConfig);
-        gameConfig  = new GameConfig();
-        playerStats = new PlayerStats();
+        playerStats = new PlayerStats(console, savedHashMaps);
+    }
 
+    public void start(){
+        console.print("Welcome to TicTacToe! :)");
+        gameConfig.chooseOpponent();
+        if (gameConfig.chooseOpponent.equals("P")) {
+            gameConfig.setPvpMode(true);
+            startPvsP();
+        } else {
+            gameConfig.setPvpMode(false);
+            startCvsP();
+        }
     }
 
     public void startCvsP(){
-
-        PlayerStats playerStats1;
         gameConfig.collectPlayerVsCpuData();
+        runNewCvPGame();
+    }
 
+    private void runNewCvPGame() {
         while (!gameActions.isGameOver()) {
             handleGameProgressPvsCpu();
         }
@@ -30,11 +42,14 @@ public class TicTacToe {
         handleGameFinished();
         playAgain();
     }
+
     // start player vs player
     public void startPvsP() {
-
         gameConfig.collectPlayersData();
+        runNewPvPGame();
+    }
 
+    private void runNewPvPGame() {
         while (!gameActions.isGameOver()) {
             handleGameProgressPvsP();
         }
@@ -45,18 +60,20 @@ public class TicTacToe {
     }
 
     private void handleGameFinished() {
-        String winner = gameActions.getWinner();
+        Player winner = gameActions.getWinner(board.getWinLength());
         if (winner != null) {
-            console.print("Congratulations, " + winner + "! You have won the game!");
-            Player winningPlayer = gameConfig.getPlayerByMarker(winner);
-            playerStats.addWin(winningPlayer);
-            Player losingPlayer = gameConfig.getPlayerByMarker(winningPlayer.getMarker().equals("X") ? "O" : "X");
-            playerStats.addLoss(losingPlayer);
+            console.print("Congratulations, " + winner.getName() + "! You have won the game!");
+            playerStats.addWin(winner.getName());
+            Player losingPlayer = gameConfig.getPlayer1().equals(winner) ? gameConfig.getPlayer2() : gameConfig.getPlayer1();
+            playerStats.addLoss(losingPlayer.getName());
         } else {
             console.print("It's a draw!");
-            playerStats.addTie(gameConfig.getPlayer1());
-            playerStats.addTie(gameConfig.getPlayer2());
+            playerStats.addTie(gameConfig.getPlayer1().getName());
+            playerStats.addTie(gameConfig.getPlayer2().getName());
         }
+        playerStats.saveMap();
+        console.print("----- Results -----");
+        playerStats.printResults();
     }
 
     private void handleGameProgressPvsP() {
@@ -91,7 +108,11 @@ public class TicTacToe {
         }
         if (answer.equals("Y")) {
             gameActions.reset();
-            startPvsP();
+            if (gameConfig.isPvpMode()) {
+                runNewPvPGame();
+            } else {
+                runNewCvPGame();
+            }
         } else {
             console.print("Thanks for playing!");
         }

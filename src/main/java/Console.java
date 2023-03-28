@@ -23,7 +23,13 @@ class Console {
         int index = 0;
         for(int i = 0; i < board.getSize(); i++){
             for (int j = 0; j < board.getSize(); j++){
-                System.out.print(board.getBoardField(index) +  "|");
+                if(board.getBoardField(index).contains("X")){
+                    System.out.print("XXX" +  "|");
+                } else if(board.getBoardField(index).contains("O")){
+                    System.out.print("OOO" +  "|");
+                } else{
+                    System.out.print(("000" + board.getBoardField(index)).substring(board.getBoardField(index).length()) +  "|");
+                }
                 index++;
             }
             print(generateNewLine(board.getSize()));
@@ -34,7 +40,7 @@ class Console {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n");
         for(int i = 0; i < size; i++){
-            stringBuilder.append("-+");
+            stringBuilder.append("---+");
         }
         return stringBuilder.substring(0, stringBuilder.length() - 1);
     }

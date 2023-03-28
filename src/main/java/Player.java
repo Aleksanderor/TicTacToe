@@ -1,10 +1,15 @@
+import java.io.Serializable;
+import java.util.Objects;
 import java.util.Scanner;
 
-class Player {
-    private final String name;
-    private final String marker;
+class Player implements Serializable {
+    private  String name;
+    private  String marker;
 
     GameConfig gameConfig;
+
+    public Player() {
+    }
 
     public Player(String name, String marker) {
         this.name = name;
@@ -25,6 +30,14 @@ class Player {
         } else {
             return gameConfig.getPlayer2();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(name, player.name);
     }
 }
 

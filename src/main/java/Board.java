@@ -1,18 +1,17 @@
 class Board {
     private String[] board;
     private int size;
-    private final int[][] winConditions = {
-            {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // Rows
-            {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // Columns
-            {0, 4, 8}, {2, 4, 6} // Diagonals
-    };
+    private int winLength;
+    private final int[][] winConditions;
 
-    public Board(int size) {
+    public Board(int size, int winLength) {
         board = new String[(int) Math.pow(size,2)];
         this.size = size;
+        this.winLength = winLength;
         for (int i = 0; i < Math.pow(size,2); i++) {
             board[i] = String.valueOf(i+1);
         }
+        winConditions = WinConditionsCalculator.countWinConditions(size,winLength);
     }
 
     public String getBoardField(int index) {
@@ -29,5 +28,9 @@ class Board {
 
     public int getSize() {
         return size;
+    }
+
+    public int getWinLength() {
+        return winLength;
     }
 }
