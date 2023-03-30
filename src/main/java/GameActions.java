@@ -85,7 +85,7 @@ public class GameActions {
 
     public void reset() {
         player1Turn = true;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < board.getSize(); i++) {
             board.setBoardField(i, String.valueOf(i+1));
         }
     }

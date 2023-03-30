@@ -10,7 +10,8 @@ public class TicTacToe {
 
     public TicTacToe() {
         console = new Console();
-        board = new Board(10,4);
+        board = new Board(4,3
+        );
         gameConfig  = new GameConfig(console);
         gameActions = new GameActions(board, gameConfig);
         playerStats = new PlayerStats(console, savedHashMaps);
@@ -74,6 +75,7 @@ public class TicTacToe {
         playerStats.saveMap();
         console.print("----- Results -----");
         playerStats.printResults();
+
     }
 
     private void handleGameProgressPvsP() {
