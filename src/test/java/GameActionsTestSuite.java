@@ -21,7 +21,7 @@ public class GameActionsTestSuite {
 
     @Test
     void makeMoveTest() {
-        // Set up the initial state of the game
+
         board.setBoardField(0, "X");
         board.setBoardField(1, "O");
         board.setBoardField(2, "X");
