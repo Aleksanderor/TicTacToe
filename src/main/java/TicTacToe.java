@@ -4,20 +4,19 @@ public class TicTacToe {
     File savedHashMaps = new File("ranking.list");
     private final Board board;
     private Console console;
-    private GameConfig gameConfig;
+    GameConfig gameConfig;
     private final GameActions gameActions;
     private final PlayerStats playerStats;
 
     public TicTacToe() {
         console = new Console();
-        board = new Board(4,3
-        );
-        gameConfig  = new GameConfig(console);
+        board = new Board(10, 2);
+        gameConfig = new GameConfig(console);
         gameActions = new GameActions(board, gameConfig);
         playerStats = new PlayerStats(console, savedHashMaps);
     }
 
-    public void start(){
+    public void start() {
         console.print("Welcome to TicTacToe! :)");
         gameConfig.chooseOpponent();
         if (gameConfig.chooseOpponent.equals("P")) {
@@ -29,7 +28,7 @@ public class TicTacToe {
         }
     }
 
-    public void startCvsP(){
+    public void startCvsP() {
         gameConfig.collectPlayerVsCpuData();
         runNewCvPGame();
     }

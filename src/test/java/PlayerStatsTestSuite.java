@@ -22,8 +22,9 @@ public class PlayerStatsTestSuite {
 
     @Test
     public void addWinTest(){
+
         //given
-        String playerName = "Olek";
+        String playerName = "Monika";
 
         //when
         playerStats.addWin(playerName);
@@ -40,7 +41,7 @@ public class PlayerStatsTestSuite {
     public void addLossTest(){
 
         //given
-        String playerName = "Olek";
+        String playerName = "Zosia";
 
         //when
         playerStats.addLoss(playerName);
@@ -55,7 +56,7 @@ public class PlayerStatsTestSuite {
 
     @Test
     public void addTieTest(){
-        String playerName = "Olek";
+        String playerName = "Marcin";
         playerStats.addTie(playerName);
         assertEquals(0, playerStats.getResultsMap().get(playerName).getWins());
         assertEquals(0, playerStats.getResultsMap().get(playerName).getLosses());

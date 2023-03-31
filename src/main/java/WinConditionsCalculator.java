@@ -5,7 +5,6 @@ public class WinConditionsCalculator {
     public static int[][] countWinConditions(int boardSize, int winLength){
         List<List<Integer>> winConditions = new ArrayList<>();
 
-// Sprawdzanie wierszy
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j <= boardSize - winLength; j++) {
                 List<Integer> condition = new ArrayList<>();
@@ -16,7 +15,6 @@ public class WinConditionsCalculator {
             }
         }
 
-// Sprawdzanie kolumn
         for (int i = 0; i <= boardSize - winLength; i++) {
             for (int j = 0; j < boardSize; j++) {
                 List<Integer> condition = new ArrayList<>();
@@ -27,7 +25,6 @@ public class WinConditionsCalculator {
             }
         }
 
-// Sprawdzanie przekątnych \
         for (int i = 0; i <= boardSize - winLength; i++) {
             for (int j = 0; j <= boardSize - winLength; j++) {
                 List<Integer> condition = new ArrayList<>();
@@ -38,7 +35,6 @@ public class WinConditionsCalculator {
             }
         }
 
-// Sprawdzanie przekątnych /
         for (int i = 0; i <= boardSize - winLength; i++) {
             for (int j = winLength - 1; j < boardSize; j++) {
                 List<Integer> condition = new ArrayList<>();

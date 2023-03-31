@@ -15,12 +15,12 @@ public class GameActions {
 
     public int makeMove(Player player) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print(player.getName() + "'s turn. Enter a square number (1-9): ");
+        System.out.print(player.getName() + "'s turn. Enter a square number within the board size :) ");
         int squareNum = scanner.nextInt();
 
         // Check for valid input
         while (!isValidMove(squareNum, board.getSize())) {
-            System.out.print("Invalid move :( Enter a square number (1-9): ");
+            System.out.print("Invalid move :( Enter a square number within the given boad :(");
             squareNum = scanner.nextInt();
         }
 
@@ -37,7 +37,7 @@ public class GameActions {
         return squareNum;
     }
 
-    private boolean isValidMove(int squareNum, int boardSize) {
+    boolean isValidMove(int squareNum, int boardSize) {
         return squareNum >= 1 && squareNum <= 100 && isSquareEmpty(squareNum);
     }
 
@@ -87,8 +87,12 @@ public class GameActions {
         player1Turn = true;
         for (int i = 0; i < board.getSize(); i++) {
             board.setBoardField(i, String.valueOf(i+1));
+
         }
-    }
+//        for (int i = 0; i < Math.pow(size,2); i++) {
+//            board[i] = String.valueOf(i+1);
+        }
+   // }
 
     public boolean isPlayer1Turn() {
         return player1Turn;

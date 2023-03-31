@@ -2,8 +2,8 @@ public class GameConfig {
     private static final String COMPUTER_NAME = "computer";
     private final Console console;
     public String chooseOpponent;
-    private Player player1;
-    private Player player2;
+    Player player1;
+    Player player2;
     private boolean pvpMode;
 
     public GameConfig(Console console) {
@@ -19,6 +19,9 @@ public class GameConfig {
             opponentChoice = console.readString().toUpperCase();
         }
         chooseOpponent = opponentChoice;
+    }
+    public String getChooseOpponent() {
+        return chooseOpponent;
     }
 
     public void collectPlayersData(){
