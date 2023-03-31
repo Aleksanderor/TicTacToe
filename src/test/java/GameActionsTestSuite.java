@@ -28,10 +28,9 @@ public class GameActionsTestSuite {
         board.setBoardField(3, "O");
         board.setBoardField(4, "O");
 
-        // Perform a move
        //gameActions.makeMove(5, "X");
 
-        // Verify that the move was made correctly
+
         assertEquals("X", board.getBoardField(5));
     }
 
