@@ -16,6 +16,11 @@ public class PlayerStats {
         this.console = console;
         this.savedHashMaps = file;
         loadMap();
+
+    }
+
+    public Map<String, GameScore> getResultsMap() {
+        return resultsMap;
     }
 
     public void addWin(String player) {
@@ -71,7 +76,7 @@ public class PlayerStats {
         }
     }
 
-    private void loadMap() {
+    public void loadMap() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(savedHashMaps));
             Object readMap = ois.readObject();
@@ -83,4 +88,9 @@ public class PlayerStats {
             System.out.println("Błąd podczas odczytu z pliku");
         }
     }
+
+    public File getSavedHashMaps() {
+        return savedHashMaps;
+    }
 }
+
