@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerTestSuite {
 
     @Test
-    public void testGetMarker() {
+    public void getMarkerTest() {
         Player player = new Player("Jerzy", "X");
         assertEquals("X", player.getMarker());
     }
 
     @Test
-    public void testEquals() {
+    public void equalsTest() {
         Player player1 = new Player("olek", "X");
         Player player2 = new Player("olek", "O");
         Player player3 = new Player("tomek", "X");
@@ -21,7 +21,7 @@ public class PlayerTestSuite {
     }
 
     @Test
-    public void testGetName() {
+    public void getNameTest() {
         Player player = new Player("Jacek", "O");
         assertEquals("Jacek", player.getName());
     }

@@ -38,7 +38,7 @@ public class GameActionsTestSuite {
     }
 
     @Test
-    public void testGetWinner() {
+    public void getWinnerTest() {
         // Given
 
         Player player1 = new Player("Player 1", "X");

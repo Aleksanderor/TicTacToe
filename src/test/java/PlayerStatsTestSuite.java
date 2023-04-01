@@ -65,7 +65,7 @@ public class PlayerStatsTestSuite {
     }
 
     @Test
-    public void loadMap (){
+    public void loadMapTest (){
 
         //given
         GameScore loadedGameScore = new GameScore(2, 1, 0, 3, null);

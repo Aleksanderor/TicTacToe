@@ -15,7 +15,7 @@ public class GameConfigTestSuite {
     }
 
     @Test
-    public void testGetPlayerByMarker() {
+    public void getPlayerByMarkerTest() {
         // given
         Player player1 = new Player("Tomek", "X");
         Player player2 = new Player("Jacek", "O");
@@ -48,14 +48,7 @@ public class GameConfigTestSuite {
         // then
         assertEquals(player2, result);
     }
-    @Test
-    public void isPvpModeTest() {
-        Console console = new Console();
-        GameConfig gameConfig = new GameConfig(console);
-        assertFalse(gameConfig.isPvpMode());
-        gameConfig.setPvpMode(true);
-        assertTrue(gameConfig.isPvpMode());
-    }
+
     @Test
     public void collectPlayerVsCpuDataTest() {
         Console console = mock(Console.class);
@@ -66,18 +59,6 @@ public class GameConfigTestSuite {
         assertNotNull(gameConfig.getPlayer2());
         assertFalse(gameConfig.getPlayer1().getName().isEmpty());
         assertEquals(gameConfig.getPlayer2().getName(), "computer");
-    }
-    @Test
-    public void collectPlayersDataTest() {
-        Console console = mock(Console.class);
-        when(console.readString()).thenReturn("Test", "X");
-        GameConfig gameConfig = new GameConfig(console);
-        gameConfig.collectPlayersData();
-        assertNotNull(gameConfig.getPlayer1());
-        assertNotNull(gameConfig.getPlayer2());
-        assertFalse(gameConfig.getPlayer1().getName().isEmpty());
-        assertFalse(gameConfig.getPlayer2().getName().isEmpty());
-        assertNotEquals(gameConfig.getPlayer1().getMarker(), gameConfig.getPlayer2().getMarker());
     }
 
     @Test
@@ -99,7 +80,7 @@ public class GameConfigTestSuite {
     }
 
     @Test
-    public void testCollectPlayersData() {
+    public void collectPlayersDataTest() {
 
         //Given
         Console console = mock(Console.class);
@@ -128,7 +109,7 @@ public class GameConfigTestSuite {
     }
 
     @Test
-    public void testIsPvpMode() {
+    public void isPvpModeTest () {
         Console console = mock(Console.class);
         GameConfig gameConfig = new GameConfig(console);
         assertFalse(gameConfig.isPvpMode());
@@ -136,7 +117,7 @@ public class GameConfigTestSuite {
         assertTrue(gameConfig.isPvpMode());
     }
     @Test
-    public void testSetPvpMode() {
+    public void setPvpModeTest() {
 
         Console console = mock(Console.class);
         GameConfig gameConfig = new GameConfig(console);
