@@ -85,14 +85,10 @@ public class GameActions {
 
     public void reset() {
         player1Turn = true;
-        for (int i = 0; i < board.getSize(); i++) {
+        for (int i = 0; i < Math.pow(board.getSize(), 2); i++) {
             board.setBoardField(i, String.valueOf(i+1));
-
         }
-//        for (int i = 0; i < Math.pow(size,2); i++) {
-//            board[i] = String.valueOf(i+1);
-        }
-   // }
+    }
 
     public boolean isPlayer1Turn() {
         return player1Turn;
@@ -101,4 +97,5 @@ public class GameActions {
     public void changePlayerTurn(){
         this.player1Turn = !this.isPlayer1Turn();
     }
+
 }

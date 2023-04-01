@@ -15,9 +15,9 @@ class Console {
         return scanner.nextLine();
     }
 
-//    public int readInt() {
-//        return scanner.nextInt();
-
+    public int readInt() {
+        return scanner.nextInt();
+    }
 
     public void display(Board board) {
         int index = 0;

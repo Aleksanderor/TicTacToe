@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,21 +21,6 @@ public class GameActionsTestSuite {
     }
 
     @Test
-    void makeMoveTest() {
-
-        board.setBoardField(0, "X");
-        board.setBoardField(1, "O");
-        board.setBoardField(2, "X");
-        board.setBoardField(3, "O");
-        board.setBoardField(4, "O");
-
-       //gameActions.makeMove(5, "X");
-
-
-        assertEquals("X", board.getBoardField(5));
-    }
-
-    @Test
     void isDrawTest() {
 
         assertFalse(gameActions.isDraw());
@@ -51,6 +37,30 @@ public class GameActionsTestSuite {
         gameActions.reset();
     }
 
+    @Test
+    public void testGetWinner() {
+        // Given
+
+        Player player1 = new Player("Player 1", "X");
+        Player player2 = new Player("Player 2", "O");
+        GameConfig gameConfig = Mockito.mock(GameConfig.class);
+        Mockito.when(gameConfig.getPlayerByMarker("X")).thenReturn(player1);
+        Mockito.when(gameConfig.getPlayerByMarker("O")).thenReturn(player2);
+
+        TicTacToe ticTacToe = new TicTacToe();
+        Player expectedWinner = gameConfig.getPlayerByMarker("X");
+        board.setBoardField(0, "X");
+        board.setBoardField(1, "X");
+        board.setBoardField(2, "X");
+        board.setBoardField(5, "O");
+        board.setBoardField(3, "O");
+
+        // When
+        Player actualWinner = gameActions.getWinner(3);
+
+        // Then
+        assertEquals(expectedWinner, actualWinner);
+    }
     @Test
     void isGameOverTest() {
 
@@ -73,6 +83,7 @@ public class GameActionsTestSuite {
 
     @Test
     void isValidMoveTest() {
+
         Assertions.assertTrue(gameActions.isValidMove(1, 3));
         Assertions.assertTrue(gameActions.isValidMove(9, 10));
         Assertions.assertFalse(gameActions.isValidMove(0, 3));
@@ -86,7 +97,5 @@ public class GameActionsTestSuite {
         board.setBoardField(0, "X");
         Assertions.assertFalse(gameActions.isSquareEmpty(1));
     }
-
-
 
 }

@@ -20,9 +20,6 @@ public class GameConfig {
         }
         chooseOpponent = opponentChoice;
     }
-    public String getChooseOpponent() {
-        return chooseOpponent;
-    }
 
     public void collectPlayersData(){
         console.print("Player 1, enter your name:");
@@ -82,4 +79,6 @@ public class GameConfig {
     public void setPvpMode(boolean pvpMode) {
         this.pvpMode = pvpMode;
     }
+
+
 }

@@ -1,19 +1,23 @@
 import java.io.File;
+import java.util.Scanner;
 
 public class TicTacToe {
-    File savedHashMaps = new File("ranking.list");
-    private final Board board;
-    private Console console;
+    public GameActions getGameActions;
+    private File savedHashMaps = new File("ranking.list");
+    Board board;
+    Console console;
     GameConfig gameConfig;
     private final GameActions gameActions;
     private final PlayerStats playerStats;
 
+
     public TicTacToe() {
         console = new Console();
-        board = new Board(10, 2);
+        board = new Board(5, 2);
         gameConfig = new GameConfig(console);
         gameActions = new GameActions(board, gameConfig);
         playerStats = new PlayerStats(console, savedHashMaps);
+
     }
 
     public void start() {
@@ -43,7 +47,6 @@ public class TicTacToe {
         playAgain();
     }
 
-    // start player vs player
     public void startPvsP() {
         gameConfig.collectPlayersData();
         runNewPvPGame();
@@ -118,4 +121,5 @@ public class TicTacToe {
             console.print("Thanks for playing!");
         }
     }
+
 }
