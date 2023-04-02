@@ -21,7 +21,6 @@ class Board {
     public void setBoardField(int index, String value) {
         board[index] = value;
     }
-
     public int[][] getWinConditions() {
         return winConditions;
     }
@@ -29,6 +28,8 @@ class Board {
     public int getSize() {
         return size;
     }
+
+    public int getSizeSquared() { return size * size; }
 
     public int getWinLength() {
         return winLength;

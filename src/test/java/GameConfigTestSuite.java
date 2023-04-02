@@ -16,10 +16,10 @@ public class GameConfigTestSuite {
 
     @Test
     public void getPlayerByMarkerTest() {
+
         // given
         Player player1 = new Player("Tomek", "X");
         Player player2 = new Player("Jacek", "O");
-        GameConfig gameConfig = new GameConfig(new Console());
         gameConfig.player1 = player1;
         gameConfig.player2 = player2;
 
@@ -38,7 +38,6 @@ public class GameConfigTestSuite {
         // given
         Player player1 = new Player("Tomek", "X");
         Player player2 = new Player("Jacek", "O");
-        gameConfig = new GameConfig(new Console());
         gameConfig.player1 = player1;
         gameConfig.player2 = player2;
 
@@ -51,45 +50,63 @@ public class GameConfigTestSuite {
 
     @Test
     public void collectPlayerVsCpuDataTest() {
+
+        // given
         Console console = mock(Console.class);
-        when(console.readString()).thenReturn("Test");
+        when(console.readString()).thenReturn("Olek").thenReturn("X");
         GameConfig gameConfig = new GameConfig(console);
+
+        // when
         gameConfig.collectPlayerVsCpuData();
-        assertNotNull(gameConfig.getPlayer1());
-        assertNotNull(gameConfig.getPlayer2());
-        assertFalse(gameConfig.getPlayer1().getName().isEmpty());
-        assertEquals(gameConfig.getPlayer2().getName(), "computer");
+
+        // then
+        assertEquals("Olek", gameConfig.getPlayer1().getName());
+        assertEquals("x", gameConfig.getPlayer1().getMarker());
+        assertEquals("computer", gameConfig.getPlayer2().getName());
+        assertEquals("O", gameConfig.getPlayer2().getMarker());
     }
 
     @Test
     public void chooseOpponentComputerTest() {
+
+        // given
         Console console = mock(Console.class);
         when(console.readString()).thenReturn("C");
         GameConfig gameConfig = new GameConfig(console);
+
+        // when
         gameConfig.chooseOpponent();
+
+        // then
         assertEquals("C", gameConfig.chooseOpponent);
     }
 
     @Test
     public void chooseOpponentPlayerTest() {
+
+        // given
         Console console = mock(Console.class);
         when(console.readString()).thenReturn("P");
         GameConfig gameConfig = new GameConfig(console);
+
+        // when
         gameConfig.chooseOpponent();
+
+        //then
         assertEquals("P", gameConfig.chooseOpponent);
     }
 
     @Test
     public void collectPlayersDataTest() {
 
-        //Given
+        // given
         Console console = mock(Console.class);
         GameConfig gameConfig = new GameConfig(console);
 
         String player1Name = "Olek";
-        String player1Marker = "O";
+        String player1Marker = "o";
         String player2Name = "Marek";
-        String expectedPlayer2Marker = "X";
+        String expectedPlayer2Marker = "x";
 
         when(console.readString()).thenReturn(player1Name)
                 .thenReturn(player1Marker)
@@ -97,7 +114,7 @@ public class GameConfigTestSuite {
 
         gameConfig.collectPlayersData();
 
-        //Then
+        // then
         verify(console).print("Player 1, enter your name:");
         verify(console).print(player1Name + ", choose your marker (X or O):");
         verify(console).print("Player 2, enter your name:");
@@ -110,22 +127,27 @@ public class GameConfigTestSuite {
 
     @Test
     public void isPvpModeTest () {
+
+        // given
         Console console = mock(Console.class);
         GameConfig gameConfig = new GameConfig(console);
         assertFalse(gameConfig.isPvpMode());
         gameConfig.setPvpMode(true);
+
+        // then
         assertTrue(gameConfig.isPvpMode());
     }
     @Test
     public void setPvpModeTest() {
-
+        // given
         Console console = mock(Console.class);
         GameConfig gameConfig = new GameConfig(console);
-
         assertFalse(gameConfig.isPvpMode());
 
+        // when
         gameConfig.setPvpMode(true);
 
+        // then
         assertTrue(gameConfig.isPvpMode());
     }
 

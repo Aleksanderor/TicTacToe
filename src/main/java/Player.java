@@ -3,6 +3,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 class Player implements Serializable {
+
     private  String name;
     private  String marker;
 

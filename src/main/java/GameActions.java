@@ -7,21 +7,29 @@ public class GameActions {
 
     private GameConfig gameConfig;
 
-
     public GameActions(Board board, GameConfig gameConfig) {
         this.board = board;
         this.gameConfig = gameConfig;
     }
 
+    public int getInt(Scanner sc){
+        while(!sc.hasNextInt()) {
+            System.out.print("Invalid move :( Enter a square number within the given boad :(");
+            sc.next();
+        }
+
+        return sc.nextInt();
+    }
+
     public int makeMove(Player player) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(player.getName() + "'s turn. Enter a square number within the board size :) ");
-        int squareNum = scanner.nextInt();
 
-        // Check for valid input
-        while (!isValidMove(squareNum, board.getSize())) {
+        int squareNum = getInt(scanner);
+
+        while (!isValidMove(squareNum, board.getSizeSquared())) {
             System.out.print("Invalid move :( Enter a square number within the given boad :(");
-            squareNum = scanner.nextInt();
+            squareNum = getInt(scanner);
         }
 
         return squareNum;
@@ -31,14 +39,14 @@ public class GameActions {
         int squareNum;
         Random rand = new Random();
         do {
-            squareNum = rand.nextInt(board.getSize()) + 1;
-        } while (!isValidMove(squareNum, board.getSize()));
+            squareNum = rand.nextInt(board.getSizeSquared()); //+ 1;
+        } while (!isValidMove(squareNum, board.getSizeSquared()));
         System.out.printf("Computer made move and selected %s \n", squareNum);
         return squareNum;
     }
 
     boolean isValidMove(int squareNum, int boardSize) {
-        return squareNum >= 1 && squareNum <= 100 && isSquareEmpty(squareNum);
+        return squareNum >= 1 && squareNum <= boardSize && isSquareEmpty(squareNum);
     }
 
     public boolean isSquareEmpty(int squareNum) {
@@ -54,7 +62,7 @@ public class GameActions {
     }
 
     public boolean isDraw() {
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < board.getSizeSquared(); i++) {
             if (board.getBoardField(i).equals(String.valueOf(i+1))) {
                 return false;
             }
@@ -70,18 +78,17 @@ public class GameActions {
                 line.append(board.getBoardField(condition[i]));
             }
 
-            if (line.toString().equals("X".repeat(winLength))) {
-                marker = "X";
+            if (line.toString().toLowerCase().equals("x".repeat(winLength))) {
+                marker = "x";
                 break;
             }
-            else if (line.toString().equals("O".repeat(winLength))) {
-                marker = "O";
+            else if (line.toString().toLowerCase().equals("o".repeat(winLength))) {
+                marker = "o";
                 break;
             }
         }
         return marker != null ? gameConfig.getPlayerByMarker(marker) : null;
     }
-
 
     public void reset() {
         player1Turn = true;

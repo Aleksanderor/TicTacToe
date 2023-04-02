@@ -9,8 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlayerStatsTestSuite {
 
-    Console console;
-    File file;
     PlayerStats playerStats;
 
     @BeforeEach
@@ -56,8 +54,14 @@ public class PlayerStatsTestSuite {
 
     @Test
     public void addTieTest(){
+
+        // given
         String playerName = "Marcin";
+
+        // when
         playerStats.addTie(playerName);
+
+        // then
         assertEquals(0, playerStats.getResultsMap().get(playerName).getWins());
         assertEquals(0, playerStats.getResultsMap().get(playerName).getLosses());
         assertEquals(1, playerStats.getResultsMap().get(playerName).getTies());
@@ -67,15 +71,15 @@ public class PlayerStatsTestSuite {
     @Test
     public void loadMapTest (){
 
-        //given
+        // given
         GameScore loadedGameScore = new GameScore(2, 1, 0, 3, null);
         playerStats.getResultsMap().put("Anna", loadedGameScore);
         playerStats.saveMap();
 
-        //when
+        // when
         playerStats.loadMap();
 
-        //then
+        // then
         assertTrue(playerStats.getResultsMap().containsKey("Anna"));
         GameScore resultGameScore = playerStats.getResultsMap().get("Anna");
         assertEquals(loadedGameScore.getWins(), resultGameScore.getWins());

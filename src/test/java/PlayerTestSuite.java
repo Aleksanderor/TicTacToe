@@ -5,24 +5,45 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerTestSuite {
 
     @Test
-    public void getMarkerTest() {
+    void getMarkerTest() {
+
+        // given
         Player player = new Player("Jerzy", "X");
-        assertEquals("X", player.getMarker());
+
+        // when
+        String marker = player.getMarker();
+
+        // then
+        assertEquals("X", marker);
     }
 
     @Test
-    public void equalsTest() {
+    void playerEqualsTest() {
+
+        // given
         Player player1 = new Player("olek", "X");
         Player player2 = new Player("olek", "O");
         Player player3 = new Player("tomek", "X");
 
-        assertTrue(player1.equals(player2));
-        assertFalse(player1.equals(player3));
+        // when
+        boolean equal = player1.equals(player2);
+        boolean equal2 = player1.equals(player3);
+
+        // then
+        assertFalse(equal2);
+        assertTrue(equal);
     }
 
     @Test
-    public void getNameTest() {
+    void getNameTest() {
+
+        // given
         Player player = new Player("Jacek", "O");
-        assertEquals("Jacek", player.getName());
+
+        // when
+        String name = player.getName();
+
+        // then t
+        assertEquals("Jacek", name);
     }
 }

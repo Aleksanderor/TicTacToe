@@ -16,13 +16,13 @@ public class GameActionsTestSuite {
     void setUp() {
         board = new Board(3,3);
         Console console = new Console();
-        gameConfig = new GameConfig(console);
         gameActions = new GameActions(board, gameConfig);
     }
 
     @Test
     void isDrawTest() {
 
+        // given
         assertFalse(gameActions.isDraw());
         board.setBoardField(0, "X");
         board.setBoardField(1, "O");
@@ -33,38 +33,44 @@ public class GameActionsTestSuite {
         board.setBoardField(6, "O");
         board.setBoardField(7, "X");
         board.setBoardField(8, "X");
+
+        // when
         assertTrue(gameActions.isDraw());
+
+        // then
         gameActions.reset();
     }
 
     @Test
     public void getWinnerTest() {
-        // Given
 
-        Player player1 = new Player("Player 1", "X");
-        Player player2 = new Player("Player 2", "O");
+        // given
+        Player player1 = new Player("Player 1", "x");
+        Player player2 = new Player("Player 2", "x");
         GameConfig gameConfig = Mockito.mock(GameConfig.class);
         Mockito.when(gameConfig.getPlayerByMarker("X")).thenReturn(player1);
         Mockito.when(gameConfig.getPlayerByMarker("O")).thenReturn(player2);
-
-        TicTacToe ticTacToe = new TicTacToe();
-        Player expectedWinner = gameConfig.getPlayerByMarker("X");
+        Console console = Mockito.mock(Console.class);
+        Board board = new Board(3, 3);
+        GameActions gameActions = new GameActions(board, gameConfig);
+        Player expectedWinner = gameConfig.getPlayerByMarker("x");
         board.setBoardField(0, "X");
         board.setBoardField(1, "X");
         board.setBoardField(2, "X");
         board.setBoardField(5, "O");
         board.setBoardField(3, "O");
 
-        // When
+        // when
         Player actualWinner = gameActions.getWinner(3);
 
-        // Then
+        // then
         assertEquals(expectedWinner, actualWinner);
     }
     @Test
     void isGameOverTest() {
 
-       GameActions gameActions = new GameActions(board, gameConfig);
+        // given
+        GameActions gameActions = new GameActions(board, gameConfig);
 
         board.setBoardField(0, "X");
         board.setBoardField(1, "O");
@@ -76,7 +82,11 @@ public class GameActionsTestSuite {
         board.setBoardField(7, "X");
         board.setBoardField(8, "O");
 
-        assertTrue(gameActions.isGameOver());
+        // when
+        boolean isGameOver = gameActions.isGameOver();
+
+        // then
+        assertTrue(isGameOver);
         gameActions.reset();
         assertFalse(gameActions.isGameOver());
     }
@@ -84,18 +94,30 @@ public class GameActionsTestSuite {
     @Test
     void isValidMoveTest() {
 
-        Assertions.assertTrue(gameActions.isValidMove(1, 3));
-        Assertions.assertTrue(gameActions.isValidMove(9, 10));
-        Assertions.assertFalse(gameActions.isValidMove(0, 3));
+        // when
+        boolean isValidBefore = gameActions.isValidMove(1, 3);
+        boolean isValidAfter = gameActions.isValidMove(0, 3);
+        boolean isValidBeforeOutOfRange = gameActions.isValidMove(9, 10);
         board.setBoardField(0, "X");
-        Assertions.assertFalse(gameActions.isValidMove(1, 3));
+        boolean isValidAfterOutOfRange = gameActions.isValidMove(1, 3);
+
+        // then
+        assertTrue(isValidBefore);
+        assertFalse(isValidAfter);
+        assertTrue(isValidBeforeOutOfRange);
+        assertFalse(isValidAfterOutOfRange);
     }
 
     @Test
     void isSquareEmptyTest() {
-        Assertions.assertTrue(gameActions.isSquareEmpty(1));
-        board.setBoardField(0, "X");
-        Assertions.assertFalse(gameActions.isSquareEmpty(1));
-    }
 
+        // when
+        boolean isSquareEmptyBefore = gameActions.isSquareEmpty(1);
+        board.setBoardField(0, "X");
+        boolean isSquareEmptyAfter = gameActions.isSquareEmpty(1);
+
+        // then
+        assertTrue(isSquareEmptyBefore);
+        assertFalse(isSquareEmptyAfter);
+    }
 }

@@ -16,7 +16,6 @@ public class PlayerStats {
         this.console = console;
         this.savedHashMaps = file;
         loadMap();
-
     }
 
     public Map<String, GameScore> getResultsMap() {

@@ -23,9 +23,9 @@ class Console {
         int index = 0;
         for(int i = 0; i < board.getSize(); i++){
             for (int j = 0; j < board.getSize(); j++){
-                if(board.getBoardField(index).contains("X")){
+                if(board.getBoardField(index).toLowerCase().contains("x")){
                     System.out.print("XXX" +  "|");
-                } else if(board.getBoardField(index).contains("O")){
+                } else if(board.getBoardField(index).toLowerCase().contains("o")){
                     System.out.print("OOO" +  "|");
                 } else{
                     System.out.print(("000" + board.getBoardField(index)).substring(board.getBoardField(index).length()) +  "|");

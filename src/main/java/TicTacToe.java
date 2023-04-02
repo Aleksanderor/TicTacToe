@@ -7,17 +7,21 @@ public class TicTacToe {
     Board board;
     Console console;
     GameConfig gameConfig;
-    private final GameActions gameActions;
-    private final PlayerStats playerStats;
+    private GameActions gameActions;
+    private PlayerStats playerStats;
 
 
     public TicTacToe() {
         console = new Console();
-        board = new Board(5, 2);
+        board = new Board(4, 2);
         gameConfig = new GameConfig(console);
         gameActions = new GameActions(board, gameConfig);
         playerStats = new PlayerStats(console, savedHashMaps);
+    }
 
+    public TicTacToe(GameConfig gameConfig) {
+        this.board = board;
+        this.gameConfig = gameConfig;
     }
 
     public void start() {
@@ -56,7 +60,6 @@ public class TicTacToe {
         while (!gameActions.isGameOver()) {
             handleGameProgressPvsP();
         }
-
         console.display(board);
         handleGameFinished();
         playAgain();
@@ -77,7 +80,6 @@ public class TicTacToe {
         playerStats.saveMap();
         console.print("----- Results -----");
         playerStats.printResults();
-
     }
 
     private void handleGameProgressPvsP() {
@@ -121,5 +123,4 @@ public class TicTacToe {
             console.print("Thanks for playing!");
         }
     }
-
 }

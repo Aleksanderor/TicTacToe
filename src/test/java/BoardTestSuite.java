@@ -7,7 +7,11 @@ public class BoardTestSuite {
 
     @Test
     void boardInitializationTest() {
+
+        // given
         Board board = new Board(3, 3);
+
+        // then
         for (int i = 0; i < 9; i++) {
             assertEquals(String.valueOf(i+1), board.getBoardField(i));
         }
@@ -26,8 +30,14 @@ public class BoardTestSuite {
     }
     @Test
     void boardFieldSettingTest() {
+
+        // given
         Board board = new Board(3, 3);
+
+        // when
         board.setBoardField(4, "X");
+
+        // then
         assertEquals("X", board.getBoardField(4));
     }
 }
