@@ -25,7 +25,7 @@ public class TicTacToe {
     }
 
     public void start() {
-        console.print("Welcome to TicTacToe! :)");
+        console.print("Welcome to TicTacToee! :)");
         gameConfig.chooseOpponent();
         if (gameConfig.chooseOpponent.equals("P")) {
             gameConfig.setPvpMode(true);
